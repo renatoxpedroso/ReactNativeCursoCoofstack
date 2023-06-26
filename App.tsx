@@ -9,7 +9,6 @@ function App(): JSX.Element {
     <ThemeProvider theme={theme}>
       <SafeAreaView>
         <Button title='Entrar' marginTop='s20'/>
-        <Button preset='secondary' title='Secondary' marginTop='s20'/>
         <Button preset='outline' title='OutLine' marginTop='s20'/>
       </SafeAreaView>
     </ThemeProvider>
