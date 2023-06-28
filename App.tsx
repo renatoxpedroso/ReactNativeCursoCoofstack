@@ -13,7 +13,7 @@ function App(): JSX.Element {
         <Button loading title="Entrar" marginTop="s20" />
         <Button disabled preset="outline" title="OutLine" marginTop="s20" />
 
-        <Icon name='eyeOff' color='grayBlack' size={50}/>
+        <Icon name='search' color='grayBlack' size={50}/>
       </SafeAreaView>
     </ThemeProvider>
   );
