@@ -11,7 +11,7 @@ export function SignUpScreen() {
     //TODO implementar
   }
   return (
-    <Screen>
+    <Screen canGoBack>
       <Text preset="headingLarge" marginTop="s32">
         Criar uma conta
       </Text>
