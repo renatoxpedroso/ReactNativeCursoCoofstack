@@ -36,7 +36,7 @@ export interface IconBase{
 
 interface Props{
     name: IconName;
-    color: ThemeColors;
+    color?: ThemeColors;
     size?: number;
 }
 
