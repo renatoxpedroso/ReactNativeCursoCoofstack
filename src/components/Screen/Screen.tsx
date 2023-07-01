@@ -4,7 +4,8 @@ import {useAppTheme} from '../../hooks/useAppThem';
 import {useAppSafeArea} from '../../hooks/useAppSafeArea';
 import {Icon} from '../Icon/Icon';
 import {Text} from '../Text/Text';
-import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+import {KeyboardAvoidingView, Platform, ScrollView, ScrollViewComponent} from 'react-native';
+import { ScrollViewContainer, ViewContainer } from './components/ScrollViewContainer';
 
 interface ScreenProps {
   children: React.ReactNode;
@@ -18,10 +19,13 @@ export function Screen({
   scrollable = false,
 }: ScreenProps) {
   const {top, bottom} = useAppSafeArea();
+  const {colors} = useAppTheme();
+  const Container = scrollable ? ScrollViewContainer : ViewContainer;
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView>
+      <Container backgroundColor={colors.background}>
         <Box
           paddingHorizontal="s24"
           style={{paddingTop: top, paddingBottom: bottom}}>
@@ -35,7 +39,7 @@ export function Screen({
           )}
           {children}
         </Box>
-      </ScrollView>
+      </Container>
     </KeyboardAvoidingView>
   );
 }
