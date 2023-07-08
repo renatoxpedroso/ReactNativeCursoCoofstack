@@ -4,6 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {LoginScreen} from '../screens/auth/LoginScreen/LoginScreen';
 import {SignUpScreen} from '../screens/auth/SignUpScreen/SignUpScreen';
 
+export type RootStackParamList = {
+  LoginScreen: undefined;
+  SignUpScreen: undefined;
+  // TODO
+};
+
 const Stack = createNativeStackNavigator();
 
 export function Router() {
