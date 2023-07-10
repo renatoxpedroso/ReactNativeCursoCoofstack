@@ -29,6 +29,10 @@ import {SearchIcon} from '../../assets/icons/SearchIcon';
 import {SettingsIcon} from '../../assets/icons/SettingsIcon';
 import {TrashIcon} from '../../assets/icons/TrashIcon';
 import {Pressable} from 'react-native';
+import { CheckRoundIcon } from '../../assets/icons/CheckRoundIcon';
+import { LoaderIcon } from '../../assets/icons/LoaderIcon';
+import { MessageRoundIcon } from '../../assets/icons/MessageRoundIcon';
+import { MessageRoundLightIcon } from '../../assets/icons/MessageRoundLightIcon';
 
 export interface IconBase {
   size?: number;
@@ -74,6 +78,7 @@ const iconRegistry = {
   chat: ChatIcon,
   chatOn: ChatOnIcon,
   check: CheckIcon,
+  checkRound: CheckRoundIcon,
   chevronRight: ChevronRightIcon,
   comment: CommentIcon,
   flashOff: FlashOffIcon,
@@ -82,7 +87,10 @@ const iconRegistry = {
   heartFill: HeartFillIcon,
   home: HomeIcon,
   homeFill: HomeFillIcon,
+  loader: LoaderIcon,
   message: MessageIcon,
+  messageRound: MessageRoundIcon,
+  messageRoundLight: MessageRoundLightIcon,
   newPost: NewPostIcon,
   profile: ProfileIcon,
   profileFill: ProfileFillIcon,
