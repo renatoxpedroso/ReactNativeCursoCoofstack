@@ -2,14 +2,13 @@ import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {Screen} from '../../../components/Screen/Screen';
 import {Text} from '../../../components/Text/Text';
-import {TextInput} from '../../../components/TextInput/TextInput';
-import {Icon} from '../../../components/Icon/Icon';
 import {Button} from '../../../components/Button/Button';
 import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../routes/Routes';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
 import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
 
 type SignUpFormType = {
   userName: string;
@@ -82,7 +81,8 @@ export function SignUpScreen({navigation}: ScreenProps) {
         placeholder="Digite seu e-mail"
         boxProps={{marginBottom: 's20'}}
       />
-      <Controller
+
+      <FormPasswordInput
         control={control}
         name="password"
         rules={{
@@ -92,16 +92,9 @@ export function SignUpScreen({navigation}: ScreenProps) {
             message: 'Senha inválido',
           },
         }}
-        render={({field, fieldState}) => (
-          <PasswordInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="Senha"
-            placeholder="Digite sua senha"
-            boxProps={{marginBottom: 's48'}}
-          />
-        )}
+        label="Senha"
+        placeholder="Digite sua senha"
+        boxProps={{marginBottom: 's48'}}
       />
 
       <Button

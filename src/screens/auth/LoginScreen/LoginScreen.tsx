@@ -9,6 +9,7 @@ import {RootStackParamList} from '../../../routes/Routes';
 import {Alert} from 'react-native';
 import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import { FormTextInput } from '../../../components/Form/FormTextInput';
+import { FormPasswordInput } from '../../../components/Form/FormPasswordInput';
 
 type LoginFormType = {
   email: string;
@@ -62,28 +63,21 @@ export function LoginScreen({navigation}: ScreenProps) {
         boxProps={{marginBottom: 's20'}}
       />
     
-      <Controller
+    <FormPasswordInput
         control={control}
         name="password"
         rules={{
-          required: 'Senha obrigatória',
+          required: 'Senha obrigatório',
           minLength: {
             value: 8,
             message: 'Senha deve ter no mínimo 8 caracteres',
           },
         }}
-        render={({field, fieldState}) => (
-          <PasswordInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="Senha"
-            placeholder="Digite sua senha"
-            boxProps={{marginBottom: 's20'}}
-          />
-        )}
+        label="Senha"
+        placeholder="Digite sua senha"
+        boxProps={{marginBottom: 's20'}}
       />
-
+      
       <Text
         onPress={navigateToForgotPasswordScreen}
         preset="paragraphSmall"
