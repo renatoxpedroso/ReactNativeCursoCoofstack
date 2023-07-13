@@ -89,7 +89,7 @@ export function SignUpScreen({navigation}: ScreenProps) {
           required: 'Senha obrigatório',
           minLength: {
             value: 8,
-            message: 'Senha inválido',
+            message: 'Senha deve ter no mínimo 8 caracteres',
           },
         }}
         label="Senha"
