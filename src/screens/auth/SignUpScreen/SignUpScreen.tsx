@@ -9,6 +9,7 @@ import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../routes/Routes';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
+import {FormTextInput} from '../../../components/Form/FormTextInput';
 
 type SignUpFormType = {
   userName: string;
@@ -45,43 +46,29 @@ export function SignUpScreen({navigation}: ScreenProps) {
         Criar uma conta
       </Text>
 
-      <Controller
+      <FormTextInput
         control={control}
         name="userName"
         rules={{
           required: 'Username obrigatório',
         }}
-        render={({field, fieldState}) => (
-          <TextInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="Seu username"
-            placeholder="@"
-            boxProps={{marginBottom: 's20'}}
-          />
-        )}
+        label="Seu username"
+        placeholder="@"
+        boxProps={{marginBottom: 's20'}}
       />
 
-      <Controller
+      <FormTextInput
         control={control}
         name="fullName"
         rules={{
           required: 'Nome obrigatório',
         }}
-        render={({field, fieldState}) => (
-          <TextInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="Nome completo"
-            placeholder="Digite seu nome completo"
-            boxProps={{marginBottom: 's20'}}
-          />
-        )}
+        label="Nome completo"
+        placeholder="Digite seu nome completo"
+        boxProps={{marginBottom: 's20'}}
       />
 
-      <Controller
+      <FormTextInput
         control={control}
         name="email"
         rules={{
@@ -91,18 +78,10 @@ export function SignUpScreen({navigation}: ScreenProps) {
             message: 'E-mail inválido',
           },
         }}
-        render={({field, fieldState}) => (
-          <TextInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="E-mail"
-            placeholder="Digite seu e-mail"
-            boxProps={{marginBottom: 's20'}}
-          />
-        )}
+        label="E-mail"
+        placeholder="Digite seu e-mail"
+        boxProps={{marginBottom: 's20'}}
       />
-
       <Controller
         control={control}
         name="password"

@@ -8,6 +8,7 @@ import {Screen} from '../../../components/Screen/Screen';
 import {RootStackParamList} from '../../../routes/Routes';
 import {Alert} from 'react-native';
 import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
+import { FormTextInput } from '../../../components/Form/FormTextInput';
 
 type LoginFormType = {
   email: string;
@@ -46,7 +47,7 @@ export function LoginScreen({navigation}: ScreenProps) {
         Digite seu e-mail e senha para entrar
       </Text>
 
-      <Controller
+      <FormTextInput 
         control={control}
         name="email"
         rules={{
@@ -56,18 +57,11 @@ export function LoginScreen({navigation}: ScreenProps) {
             message: 'E-mail inválido',
           },
         }}
-        render={({field, fieldState}) => (
-          <TextInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="E-mail"
-            placeholder="Digite seu e-mail"
-            boxProps={{mb: 's20'}}
-          />
-        )}
+        label="E-mail"
+        placeholder="Digite seu e-mail"
+        boxProps={{marginBottom: 's20'}}
       />
-
+    
       <Controller
         control={control}
         name="password"
@@ -85,7 +79,7 @@ export function LoginScreen({navigation}: ScreenProps) {
             onChangeText={field.onChange}
             label="Senha"
             placeholder="Digite sua senha"
-            boxProps={{mb: 's20'}}
+            boxProps={{marginBottom: 's20'}}
           />
         )}
       />
