@@ -7,7 +7,7 @@ import {Button} from '../../../components/Button/Button';
 import {Screen} from '../../../components/Screen/Screen';
 import {RootStackParamList} from '../../../routes/Routes';
 import {Alert} from 'react-native';
-import { PasswordInput } from '../../../components/PasswordInput/PasswordInput';
+import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 
 type LoginFormType = {
   email: string;
@@ -17,19 +17,12 @@ type LoginFormType = {
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
 
 export function LoginScreen({navigation}: ScreenProps) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
-
-  useEffect(() => {
-    const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-    setEmailErrorMessage(isValidEmail ? '' : 'E-mail inválido');
-  }, [email]);
   const {control, formState, handleSubmit} = useForm<LoginFormType>({
     defaultValues: {
       email: '',
       password: '',
     },
+    mode: 'onChange'
   });
 
   function navigateToSignUpScreen() {
