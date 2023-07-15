@@ -1,12 +1,10 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import {Screen} from '../../../components/Screen/Screen';
-import {Text} from '../../../components/Text/Text';
-import {Button} from '../../../components/Button/Button';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
 import {RootStackParamList} from '../../../routes/Routes';
-import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {Text, Button, Screen, FormTextInput} from '@components';
+
 import {
   forgotPasswordSchema,
   ForgotPasswordSchema,
