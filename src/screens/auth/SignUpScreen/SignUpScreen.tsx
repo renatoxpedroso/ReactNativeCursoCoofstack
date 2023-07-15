@@ -15,6 +15,7 @@ type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
 export function SignUpScreen({navigation}: ScreenProps) {
   const {control, formState, handleSubmit} = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       userName: '',
       fullName: '',
@@ -42,9 +43,6 @@ export function SignUpScreen({navigation}: ScreenProps) {
       <FormTextInput
         control={control}
         name="userName"
-        rules={{
-          required: 'Username obrigatório',
-        }}
         label="Seu username"
         placeholder="@"
         boxProps={{marginBottom: 's20'}}
@@ -53,9 +51,6 @@ export function SignUpScreen({navigation}: ScreenProps) {
       <FormTextInput
         control={control}
         name="fullName"
-        rules={{
-          required: 'Nome obrigatório',
-        }}
         label="Nome completo"
         placeholder="Digite seu nome completo"
         boxProps={{marginBottom: 's20'}}
@@ -64,13 +59,6 @@ export function SignUpScreen({navigation}: ScreenProps) {
       <FormTextInput
         control={control}
         name="email"
-        rules={{
-          required: 'E-mail obrigatório',
-          pattern: {
-            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: 'E-mail inválido',
-          },
-        }}
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{marginBottom: 's20'}}
@@ -79,13 +67,6 @@ export function SignUpScreen({navigation}: ScreenProps) {
       <FormPasswordInput
         control={control}
         name="password"
-        rules={{
-          required: 'Senha obrigatório',
-          minLength: {
-            value: 8,
-            message: 'Senha deve ter no mínimo 8 caracteres',
-          },
-        }}
         label="Senha"
         placeholder="Digite sua senha"
         boxProps={{marginBottom: 's48'}}

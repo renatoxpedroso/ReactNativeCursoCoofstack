@@ -6,23 +6,21 @@ import {Button} from '../../../components/Button/Button';
 import {Screen} from '../../../components/Screen/Screen';
 import {RootStackParamList} from '../../../routes/Routes';
 import {Alert} from 'react-native';
-import { FormTextInput } from '../../../components/Form/FormTextInput';
-import { FormPasswordInput } from '../../../components/Form/FormPasswordInput';
-
-type LoginFormType = {
-  email: string;
-  password: string;
-};
+import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
+import {loginSchema, LoginSchema} from './loginSchema';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
 
 export function LoginScreen({navigation}: ScreenProps) {
-  const {control, formState, handleSubmit} = useForm<LoginFormType>({
+  const {control, formState, handleSubmit} = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',
     },
-    mode: 'onChange'
+    mode: 'onChange',
   });
 
   function navigateToSignUpScreen() {
@@ -33,7 +31,7 @@ export function LoginScreen({navigation}: ScreenProps) {
     navigation.navigate('ForgotPasswordScreen');
   }
 
-  function submitForm({email, password}: LoginFormType) {
+  function submitForm({email, password}: LoginSchema) {
     Alert.alert(`Email: ${email} ${`\n`} Senha: ${password}`);
   }
 
@@ -46,36 +44,22 @@ export function LoginScreen({navigation}: ScreenProps) {
         Digite seu e-mail e senha para entrar
       </Text>
 
-      <FormTextInput 
+      <FormTextInput
         control={control}
         name="email"
-        rules={{
-          required: 'E-mail obrigatório',
-          pattern: {
-            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: 'E-mail inválido',
-          },
-        }}
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{marginBottom: 's20'}}
       />
-    
-    <FormPasswordInput
+
+      <FormPasswordInput
         control={control}
         name="password"
-        rules={{
-          required: 'Senha obrigatório',
-          minLength: {
-            value: 8,
-            message: 'Senha deve ter no mínimo 8 caracteres',
-          },
-        }}
         label="Senha"
         placeholder="Digite sua senha"
         boxProps={{marginBottom: 's20'}}
       />
-      
+
       <Text
         onPress={navigateToForgotPasswordScreen}
         preset="paragraphSmall"
