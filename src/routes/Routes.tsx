@@ -19,7 +19,7 @@ export type RootStackParamList = {
   // TODO
 };
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function Router() {
   return (

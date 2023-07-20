@@ -3,7 +3,7 @@ import {Controller, UseControllerProps, FieldValues} from 'react-hook-form';
 import {
   TextInput,
   TextInputProps,
-} from '../TextInput/TextInput';
+} from '@components';
 
 export function FormTextInput<FormType extends FieldValues>({
   control,
