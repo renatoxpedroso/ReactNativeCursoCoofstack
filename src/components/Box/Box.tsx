@@ -1,6 +1,6 @@
 // In Box.tsx
 import {TouchableOpacity, TouchableOpacityProps as RNTouchableOpacityProps} from 'react-native';
-import {Theme} from '../../theme/theme';
+import {Theme} from '@theme';
 import {
   createBox,
   createRestyleComponent,
