@@ -1,26 +1,26 @@
 import React from 'react';
 
-import {zodResolver} from '@hookform/resolvers/zod';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useForm} from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useForm } from 'react-hook-form';
 
-import {Text, Button, Screen, FormTextInput} from '@components';
-import {useResetNavigationSuccess} from '@hooks';
-import {RootStackParamList} from '@routes';
+import { Text, Button, Screen, FormTextInput } from '@components';
+import { useResetNavigationSuccess } from '@hooks';
+import { RootStackParamList } from '@routes';
 
 import {
   forgotPasswordSchema,
   ForgotPasswordSchema,
-} from '/forgotPasswordSchema';
+} from './forgotPasswordSchema';
 
 type ScreenProps = NativeStackScreenProps<
   RootStackParamList,
   'ForgotPasswordScreen'
 >;
 
-export function ForgotPasswordScreen({navigation}: ScreenProps) {
-  const {reset} = useResetNavigationSuccess();
-  const {control, formState, handleSubmit} = useForm<ForgotPasswordSchema>({
+export function ForgotPasswordScreen({ navigation }: ScreenProps) {
+  const { reset } = useResetNavigationSuccess();
+  const { control, formState, handleSubmit } = useForm<ForgotPasswordSchema>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {
       email: '',
@@ -33,7 +33,7 @@ export function ForgotPasswordScreen({navigation}: ScreenProps) {
       title: 'Enviamos as instruções para seu e-mail',
       description:
         'Clique no link enviado no seu e-mail para recuperar sua senha',
-      icon: {name: 'messageRound', color: 'primary'},
+      icon: { name: 'messageRound', color: 'primary' },
     });
   }
 
@@ -51,7 +51,7 @@ export function ForgotPasswordScreen({navigation}: ScreenProps) {
         name="email"
         label="E-mail"
         placeholder="Digite seu e-mail"
-        boxProps={{marginBottom: 's40'}}
+        boxProps={{ marginBottom: 's40' }}
       />
       <Button
         disabled={!formState.isValid}
