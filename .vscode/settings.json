@@ -1,20 +1,5 @@
 {
-    "cSpell.words": [
-        "curto",
-        "deve",
-        "enviado",
-        "Enviamos",
-        "enviaremos",
-        "hookform",
-        "início",
-        "instruções",
-        "longo",
-        "muito",
-        "obrigatória",
-        "obrigatório",
-        "recuperar",
-        "redefinição",
-        "Satoshi",
-        "válido"
-    ]
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
 }
