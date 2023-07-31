@@ -9,7 +9,7 @@ import {
 } from '@screens';
 import {IconProps} from '@components';
 
-export type RootStackParamList = {
+export type AuthStackParamList = {
   LoginScreen: undefined;
   SignUpScreen: undefined;
   SuccessScreen: {
@@ -21,7 +21,7 @@ export type RootStackParamList = {
   // TODO
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 export function AuthStack() {
   return (
