@@ -1,10 +1,10 @@
 import React from "react";
 
-import { AppScreenProps } from "@routes";
+import { AppTabScreenProps } from "@routes";
 import { Button, Screen, Text } from "@components";
 
 
-export function HomeScreen({navigation}: AppScreenProps<'HomeScreen'>){
+export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>){
     return(
         <Screen>
             <Text>Home Screen</Text>
