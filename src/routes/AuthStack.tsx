@@ -18,7 +18,6 @@ export type AuthStackParamList = {
     icon: Pick<IconProps, 'name' | 'color'>;
   };
   ForgotPasswordScreen: undefined;
-  // TODO
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
