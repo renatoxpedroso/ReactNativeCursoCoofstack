@@ -2,6 +2,8 @@ import React from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
+import { AuthScreenProps } from '@routes';
+
 import {useResetNavigationSuccess} from '@hooks';
 import {signUpSchema, SignUpSchema} from './signUpSchema';
 
@@ -12,8 +14,6 @@ import {
   FormTextInput,
   FormPasswordInput,
 } from '@components';
-import { AuthScreenProps } from 'src/routes/navigationType';
-
 
 export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
   const {control, formState, handleSubmit} = useForm<SignUpSchema>({

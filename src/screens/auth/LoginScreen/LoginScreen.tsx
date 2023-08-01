@@ -2,13 +2,12 @@ import React from 'react';
 
 import {useForm, Controller} from 'react-hook-form';
 import {Alert} from 'react-native';
+import { AuthScreenProps } from '@routes';
 
 import {zodResolver} from '@hookform/resolvers/zod';
 
 import {Text, Button, Screen, FormTextInput, FormPasswordInput} from '@components';
 import {loginSchema, LoginSchema} from './loginSchema';
-import { AuthScreenProps } from 'src/routes/navigationType';
-
 
 export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
   const {control, formState, handleSubmit} = useForm<LoginSchema>({

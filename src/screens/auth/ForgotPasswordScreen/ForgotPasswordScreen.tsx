@@ -2,6 +2,7 @@ import React from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { AuthScreenProps } from '@routes';
 
 import { Text, Button, Screen, FormTextInput } from '@components';
 import { useResetNavigationSuccess } from '@hooks';
@@ -10,9 +11,6 @@ import {
   forgotPasswordSchema,
   ForgotPasswordSchema,
 } from './forgotPasswordSchema';
-import { AuthScreenProps } from 'src/routes/navigationType';
-
-
 
 export function ForgotPasswordScreen({ navigation }: AuthScreenProps<'ForgotPasswordScreen'>) {
   const { reset } = useResetNavigationSuccess();
