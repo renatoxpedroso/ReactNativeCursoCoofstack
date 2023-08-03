@@ -1,22 +1,16 @@
 import React from 'react';
 
-import {zodResolver} from '@hookform/resolvers/zod';
-import {useForm} from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { AuthScreenProps } from '@routes';
 
-import {useResetNavigationSuccess} from '@hooks';
-import {signUpSchema, SignUpSchema} from './signUpSchema';
+import { useResetNavigationSuccess } from '@hooks';
+import { signUpSchema, SignUpSchema } from './signUpSchema';
 
-import {
-  Text,
-  Button,
-  Screen,
-  FormTextInput,
-  FormPasswordInput,
-} from '@components';
+import { Text, Button, Screen, FormTextInput, FormPasswordInput } from '@components';
 
-export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
-  const {control, formState, handleSubmit} = useForm<SignUpSchema>({
+export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
+  const { control, formState, handleSubmit } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       userName: '',
@@ -27,12 +21,12 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
     mode: 'onChange',
   });
 
-  const {reset} = useResetNavigationSuccess();
+  const { reset } = useResetNavigationSuccess();
   function submitForm() {
     reset({
       title: 'Sua conta foi criada com sucesso!',
       description: 'Agora é só fazer login na nossa plataforma',
-      icon: {name: 'checkRound', color: 'success'},
+      icon: { name: 'checkRound', color: 'success' },
     });
   }
 
@@ -47,7 +41,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         name="userName"
         label="Seu username"
         placeholder="@"
-        boxProps={{marginBottom: 's20'}}
+        boxProps={{ marginBottom: 's20' }}
       />
 
       <FormTextInput
@@ -55,7 +49,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         name="fullName"
         label="Nome completo"
         placeholder="Digite seu nome completo"
-        boxProps={{marginBottom: 's20'}}
+        boxProps={{ marginBottom: 's20' }}
       />
 
       <FormTextInput
@@ -63,7 +57,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         name="email"
         label="E-mail"
         placeholder="Digite seu e-mail"
-        boxProps={{marginBottom: 's20'}}
+        boxProps={{ marginBottom: 's20' }}
       />
 
       <FormPasswordInput
@@ -71,7 +65,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         name="password"
         label="Senha"
         placeholder="Digite sua senha"
-        boxProps={{marginBottom: 's48'}}
+        boxProps={{ marginBottom: 's48' }}
       />
 
       <Button

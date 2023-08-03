@@ -5,8 +5,6 @@ import {useAppTheme, useAppSafeArea} from '@hooks';
 import {
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
-  ScrollViewComponent,
 } from 'react-native';
 import {
   ScrollViewContainer,

@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 const userNameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 
@@ -8,10 +8,10 @@ export const signUpSchema = z.object({
     .string()
     .min(3, 'Nome muito curto')
     .max(50, 'Nome muito longo')
-    .transform(value => {
+    .transform((value) => {
       return value
         .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
         .join(' ');
     }),
   email: z.string().email('E-mail inválido'),
