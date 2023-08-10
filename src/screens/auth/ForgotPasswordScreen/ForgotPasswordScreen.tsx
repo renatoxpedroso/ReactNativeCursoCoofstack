@@ -7,10 +7,7 @@ import { AuthScreenProps } from '@routes';
 import { Text, Button, Screen, FormTextInput } from '@components';
 import { useResetNavigationSuccess } from '@hooks';
 
-import {
-  forgotPasswordSchema,
-  ForgotPasswordSchema,
-} from './forgotPasswordSchema';
+import { forgotPasswordSchema, ForgotPasswordSchema } from './forgotPasswordSchema';
 
 export function ForgotPasswordScreen({ navigation }: AuthScreenProps<'ForgotPasswordScreen'>) {
   const { reset } = useResetNavigationSuccess();
@@ -25,8 +22,7 @@ export function ForgotPasswordScreen({ navigation }: AuthScreenProps<'ForgotPass
   function submitForm() {
     reset({
       title: 'Enviamos as instruções para seu e-mail',
-      description:
-        'Clique no link enviado no seu e-mail para recuperar sua senha',
+      description: 'Clique no link enviado no seu e-mail para recuperar sua senha',
       icon: { name: 'messageRound', color: 'primary' },
     });
   }

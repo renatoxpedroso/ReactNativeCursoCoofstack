@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { AuthScreenProps } from '@routes';
-import { Screen, Icon, Text, Button } from "@components";
+import { Screen, Icon, Text, Button } from '@components';
 
-export function SuccessScreen({route}: AuthScreenProps<'SuccessScreen'>) {
+export function SuccessScreen({ route }: AuthScreenProps<'SuccessScreen'>) {
   function goBackToLoginScreen() {
     // TODO
   }
@@ -17,11 +17,7 @@ export function SuccessScreen({route}: AuthScreenProps<'SuccessScreen'>) {
       <Text preset="paragraphLarge" marginTop="s16">
         {route.params.description}
       </Text>
-      <Button
-        onPress={goBackToLoginScreen}
-        title="Volar ao início"
-        marginTop="s40"
-      />
+      <Button onPress={goBackToLoginScreen} title="Volar ao início" marginTop="s40" />
     </Screen>
   );
 }
