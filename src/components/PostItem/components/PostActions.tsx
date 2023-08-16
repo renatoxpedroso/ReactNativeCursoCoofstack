@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Box, Icon, IconProps, Text, TouchableOpacityBox } from '@components';
 import { Post } from '@domain';
 
@@ -10,7 +11,7 @@ export function PostActions({ reactionCount, commentCount, favoriteCount }: Prop
   }
 
   return (
-    <Box flexDirection="row" mt="s16">
+    <Box flexDirection="row" ml="s24" mt="s16">
       <Item
         onPress={likePost}
         icon={{ marked: 'heartFill', default: 'heart' }}

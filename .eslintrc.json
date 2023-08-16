@@ -11,8 +11,18 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-native"],
+  "plugins": ["react", "react-native", "import-helpers"],
   "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        // example configuration
+        "newlinesBetween": "always",
+        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ],
+
     // permite arquivos .js possuam JSX
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 
@@ -20,9 +30,6 @@
     "no-use-before-define": ["error", { "variables": false }],
 
     // Ajustar para nao passar por erros com react-navigation
-    "react/prop-types": [
-      "error",
-      { "ignore": ["navigation", "navigation.navigate"] }
-    ]
+    "react/prop-types": ["error", { "ignore": ["navigation", "navigation.navigate"] }]
   }
 }
