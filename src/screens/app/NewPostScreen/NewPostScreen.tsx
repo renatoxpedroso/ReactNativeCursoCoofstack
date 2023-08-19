@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { AppTabScreenProps } from "@routes";
-import { Screen, Text } from "@components";
+import { AppTabScreenProps } from '@routes';
+import { Screen, Text } from '@components';
 
-export function NewPostScreen({}: AppTabScreenProps<'NewPostScreen'>){
-    return(
-        <Screen>
-            <Text>NewPostScreen</Text>
-        </Screen>
-    );
+export function NewPostScreen({}: AppTabScreenProps<'NewPostScreen'>) {
+  return (
+    <Screen>
+      <Text>NewPostScreen</Text>
+    </Screen>
+  );
 }

@@ -5,6 +5,7 @@ import { FlatList, ListRenderItemInfo } from 'react-native';
 import { AppTabScreenProps } from '@routes';
 import { PostItem, Screen, Text } from '@components';
 import { Post, postService } from '@domain';
+import { HomeHeader } from './components/HomeHeader';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
   const [postList, setPostList] = useState<Post[]>([]);
@@ -23,6 +24,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
         data={postList}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
+        ListHeaderComponent={<HomeHeader />}
       />
     </Screen>
   );
