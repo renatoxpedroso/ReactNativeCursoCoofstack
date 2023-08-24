@@ -11,7 +11,7 @@ export interface MetaDataAPI {
 }
 
 /**
- * @description Interface que define  formato de uma página de dados da API
+ * @description Interface que define o formato de uma página de dados da API
  * @template Data do dado da página
  */
 export interface PageAPI<Data> {
