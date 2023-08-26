@@ -1,10 +1,10 @@
 import React from 'react';
-
 import { FlatList, ListRenderItemInfo, RefreshControl } from 'react-native';
 
 import { AppTabScreenProps } from '@routes';
 import { PostItem, Screen, Text } from '@components';
 import { Post, usePostList } from '@domain';
+
 import { HomeHeader } from './components/HomeHeader';
 import { HomeEmpty } from './components/HomeEmpty';
 

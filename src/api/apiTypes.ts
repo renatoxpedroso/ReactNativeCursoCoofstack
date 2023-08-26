@@ -1,4 +1,4 @@
-export interface MetaDataAPI {
+export interface MetaDataPageAPI {
   total: number; //24;
   per_page: number; //10;
   current_page: number; //1;

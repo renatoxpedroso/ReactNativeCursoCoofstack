@@ -1,4 +1,5 @@
 import { PageAPI, PageParams, api } from '@api';
+
 import { PostAPI } from './postTypes';
 
 async function getList(params?: PageParams): Promise<PageAPI<PostAPI>> {
