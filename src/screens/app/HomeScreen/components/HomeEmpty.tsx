@@ -9,9 +9,6 @@ interface Props {
 }
 export function HomeEmpty({ loading, error, refetch }: Props) {
   let component = <Text preset="paragraphMedium">Não foi possível carregar o feed</Text>;
-  if (loading) {
-    component = <ActivityIndicator color="primary" />;
-  }
 
   if (error) {
     component = (

@@ -4,39 +4,49 @@ import { Post, postService } from '@domain';
 
 export function usePostList() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<boolean | null>(null);
   const [postList, setPostList] = useState<Post[]>([]);
   const [page, setPage] = useState(1);
 
-  async function fetchData() {
+  async function fetchInitailData() {
     try {
       setError(null);
       setLoading(true);
-      const list = await postService.getList(page);
-      setPostList((prev) => [...prev, ...list]);
-      setPage((prev) => prev + 1);
+      const list = await postService.getList(1);
+      setPostList(list);
+      setPage(2);
     } catch (error) {
-      console.log('ERROR', error);
+      setError(true);
     } finally {
       setLoading(false);
     }
   }
 
-  function fetchNextPage() {
-    if (!loading) {
-      fetchData();
+  async function fetchNextPage() {
+    if (loading) {
+      return;
+    }
+    try {
+      setLoading(true);
+      const list = await postService.getList(page);
+      setPostList((prev) => [...prev, ...list]);
+      setPage((prev) => prev + 1);
+    } catch (error) {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
-    fetchData();
+    fetchInitailData();
   }, []);
 
   return {
     loading,
     error,
     postList,
-    refetch: fetchData,
+    refresh: fetchInitailData,
     fetchNextPage,
   };
 }
