@@ -6,13 +6,15 @@ export function usePostList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [postList, setPostList] = useState<Post[]>([]);
+  const [page, setPage] = useState(1);
 
-  async function fetchDate() {
+  async function fetchData() {
     try {
       setError(null);
       setLoading(true);
-      const list = await postService.getList();
-      setPostList(list);
+      const list = await postService.getList(page);
+      setPostList((prev) => [...prev, ...list]);
+      setPage((prev) => prev + 1);
     } catch (error) {
       console.log('ERROR', error);
     } finally {
@@ -20,14 +22,21 @@ export function usePostList() {
     }
   }
 
+  function fetchNextPage() {
+    if (!loading) {
+      fetchData();
+    }
+  }
+
   useEffect(() => {
-    fetchDate();
+    fetchData();
   }, []);
 
   return {
     loading,
     error,
     postList,
-    refetch: fetchDate,
+    refetch: fetchData,
+    fetchNextPage,
   };
 }

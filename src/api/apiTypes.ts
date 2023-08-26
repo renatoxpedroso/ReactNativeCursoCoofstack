@@ -18,3 +18,8 @@ export interface PageAPI<Data> {
   meta: MetaDataAPI;
   data: Data[];
 }
+
+export interface PageParams {
+  page?: number;
+  per_page?: number;
+}
