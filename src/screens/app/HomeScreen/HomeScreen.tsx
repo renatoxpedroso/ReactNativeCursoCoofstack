@@ -1,34 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { FlatList, ListRenderItemInfo } from 'react-native';
 
 import { AppTabScreenProps } from '@routes';
 import { PostItem, Screen, Text } from '@components';
-import { Post, postService } from '@domain';
+import { Post, usePostList } from '@domain';
 import { HomeHeader } from './components/HomeHeader';
 import { HomeEmpty } from './components/HomeEmpty';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-  const [postList, setPostList] = useState<Post[]>([]);
-
-  async function fetchDate() {
-    try {
-      setError(null);
-      setLoading(true);
-      const list = await postService.getList();
-      setPostList(list);
-    } catch (error) {
-      console.log('ERROR', error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchDate();
-  }, []);
+  const { loading, error, postList, refetch } = usePostList();
 
   function renderItem({ item }: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />;
@@ -43,7 +24,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
         renderItem={renderItem}
         contentContainerStyle={{ flex: postList.length === 0 ? 1 : undefined }}
         ListHeaderComponent={<HomeHeader />}
-        ListEmptyComponent={<HomeEmpty refetch={fetchDate} error={error} loading={loading} />}
+        ListEmptyComponent={<HomeEmpty refetch={refetch} error={error} loading={loading} />}
       />
     </Screen>
   );
