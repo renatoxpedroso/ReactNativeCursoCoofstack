@@ -22,7 +22,12 @@ export function PostItem({ post }: Props) {
         commentCount={post.commentCount}
         favoriteCount={post.favoriteCount}
       />
-      <PostBottom author={post.author} text={post.text} commentCount={post.commentCount} />
+      <PostBottom
+        author={post.author}
+        text={post.text}
+        commentCount={post.commentCount}
+        id={post.id}
+      />
     </Box>
   );
 }
