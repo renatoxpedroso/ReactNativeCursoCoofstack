@@ -6,3 +6,5 @@ export * from './Post/postAdapter';
 export * from './PostComment/postCommentTypes';
 export * from './PostComment/postCommentService';
 export * from './PostComment/postCommentAdapter';
+
+export * from './hooks/usePaginatedList';
