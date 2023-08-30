@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box, ProfileAvatar, Text } from '@components';
 import { PostComment } from '@domain';
+import { dateUtils } from '@utils';
 
 interface Props {
   postComment: PostComment;
@@ -16,7 +17,7 @@ export function PostCommentItem({ postComment }: Props) {
           {postComment.author.userName}
         </Text>
         <Text bold preset="paragraphSmall" color="gray1">
-          {postComment.message}
+          {postComment.message} - {postComment.createdAtRealtive}
         </Text>
       </Box>
     </Box>
