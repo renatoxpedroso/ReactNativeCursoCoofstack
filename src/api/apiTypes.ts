@@ -15,7 +15,7 @@ export interface MetaDataPageAPI {
  * @template Data do dado da página
  */
 export interface PageAPI<Data> {
-  meta: MetaDataAPI;
+  meta: MetaDataPageAPI;
   data: Data[];
 }
 
