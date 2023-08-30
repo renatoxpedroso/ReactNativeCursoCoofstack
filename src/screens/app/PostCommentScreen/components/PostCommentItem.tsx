@@ -11,7 +11,7 @@ export function PostCommentItem({ postComment }: Props) {
   return (
     <Box flexDirection="row" marginBottom="s16">
       <ProfileAvatar imageURL={postComment.author.profileURL} />
-      <Box ml="s12">
+      <Box ml="s12" flex={1}>
         <Text bold preset="paragraphSmall">
           {postComment.author.userName}
         </Text>

@@ -6,7 +6,7 @@ import { postCommentApi } from './postCommentApi';
 import { PostComment } from './postCommentTypes';
 
 async function getList(postId: number, page: number): Promise<Page<PostComment>> {
-  const postCommentPageAPI = await postCommentApi.getList(postId, { page, per_page: 10 });
+  const postCommentPageAPI = await postCommentApi.getList(postId, { page, per_page: 9 });
 
   return {
     data: postCommentPageAPI.data.map(postCommentAdapter.toPostComment),
