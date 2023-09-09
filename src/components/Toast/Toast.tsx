@@ -6,15 +6,15 @@ import { useToast } from '@services';
 import { $shadowProps } from '@theme';
 
 export function Toast() {
-  const { toast, hiddenToast } = useToast();
+  const { toast, hideToast } = useToast();
 
   useEffect(() => {
     if (toast) {
       setTimeout(() => {
-        hiddenToast();
+        hideToast();
       }, 2000);
     }
-  }, [hiddenToast, toast]);
+  }, [hideToast, toast]);
 
   if (!toast) {
     return null;
