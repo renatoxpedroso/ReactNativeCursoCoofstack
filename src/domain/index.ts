@@ -8,5 +8,6 @@ export * from './PostComment/postCommentService';
 export * from './PostComment/postCommentAdapter';
 export * from './PostComment/useCases/usePostCommentList';
 export * from './PostComment/useCases/usePostCommentCreate';
+export * from './PostComment/useCases/usePostCommentRemove';
 
-export * from './hooks/usePaginatedList';
+export * from './Auth';

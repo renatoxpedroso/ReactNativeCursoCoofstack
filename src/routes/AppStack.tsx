@@ -6,7 +6,7 @@ import { AppTabNavigator } from './AppTabNavigator';
 export type AppStackPramList = {
   AppTabNavigator: undefined;
   SettingsScreen: undefined;
-  PostCommentScreen: { postId: number };
+  PostCommentScreen: { postId: number; postAuthoredId: number };
 };
 
 const Stack = createNativeStackNavigator<AppStackPramList>();

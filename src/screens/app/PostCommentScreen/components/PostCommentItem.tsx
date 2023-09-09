@@ -1,25 +1,46 @@
 import React from 'react';
+import { Alert, Pressable } from 'react-native';
 
 import { Box, ProfileAvatar, Text } from '@components';
-import { PostComment } from '@domain';
-import { dateUtils } from '@utils';
+import { PostComment, postCommentService, usePostCommentRemove } from '@domain';
 
 interface Props {
   postComment: PostComment;
+  userId: number;
+  postAuthoredId: number;
+  onRemoveComment: () => void;
 }
 
-export function PostCommentItem({ postComment }: Props) {
+export function PostCommentItem({ postComment, userId, postAuthoredId, onRemoveComment }: Props) {
+  const { mutate } = usePostCommentRemove({ onSuccess: onRemoveComment });
+  const isAllowToDelete = postCommentService.isAllowDelete(postComment, userId, postAuthoredId);
+
+  function confirmRemove() {
+    Alert.alert('Deseja excluir o comentário', 'pressione confirmar', [
+      {
+        text: 'Confirmar',
+        onPress: () => mutate({ postCommentId: postComment.id }),
+      },
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+    ]);
+  }
+
   return (
-    <Box flexDirection="row" marginBottom="s16">
-      <ProfileAvatar imageURL={postComment.author.profileURL} />
-      <Box ml="s12" flex={1}>
-        <Text bold preset="paragraphSmall">
-          {postComment.author.userName}
-        </Text>
-        <Text bold preset="paragraphSmall" color="gray1">
-          {postComment.message} - {postComment.createdAtRealtive}
-        </Text>
+    <Pressable disabled={!isAllowToDelete} onLongPress={confirmRemove}>
+      <Box flexDirection="row" marginBottom="s16">
+        <ProfileAvatar imageURL={postComment.author.profileURL} />
+        <Box ml="s12" flex={1}>
+          <Text bold preset="paragraphSmall">
+            {postComment.author.userName}
+          </Text>
+          <Text bold preset="paragraphSmall" color="gray1">
+            {postComment.message} - {postComment.createdAtRealtive}
+          </Text>
+        </Box>
       </Box>
-    </Box>
+    </Pressable>
   );
 }
