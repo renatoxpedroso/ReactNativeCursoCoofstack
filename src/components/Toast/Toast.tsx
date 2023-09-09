@@ -1,13 +1,29 @@
-import { Box, BoxProps, Icon, Text } from '@components';
-import { $shadowProps } from '@theme';
+import { useEffect } from 'react';
 import { Dimensions } from 'react-native';
 
+import { Box, BoxProps, Icon, Text } from '@components';
+import { useToast } from '@services';
+import { $shadowProps } from '@theme';
+
 export function Toast() {
+  const { toast, hiddenToast } = useToast();
+
+  useEffect(() => {
+    if (toast) {
+      setTimeout(() => {
+        hiddenToast();
+      }, 2000);
+    }
+  }, [hiddenToast, toast]);
+
+  if (!toast) {
+    return null;
+  }
   return (
     <Box top={100} {...$boxStyle}>
       <Icon color="success" name="checkRound" />
       <Text style={{ flexShrink: 1 }} ml="s16" bold preset="paragraphMedium">
-        Toast
+        {toast?.message}
       </Text>
     </Box>
   );
