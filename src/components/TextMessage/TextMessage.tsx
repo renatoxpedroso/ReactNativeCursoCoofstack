@@ -5,12 +5,12 @@ import {
   TextInputProps as RNTextInputProps,
   TextStyle,
 } from 'react-native';
+
 import { Box } from '@components';
 import { useAppTheme } from '@hooks';
 import { $fontFamily, $fontSizes, Text } from '../Text/Text';
-
 export interface TextMessageProps extends RNTextInputProps {
-  onPressSend: () => void;
+  onPressSend: (message: string) => void;
 }
 
 export function TextMessage({ onPressSend, value, ...rnTextInputProps }: TextMessageProps) {
@@ -40,7 +40,7 @@ export function TextMessage({ onPressSend, value, ...rnTextInputProps }: TextMes
           style={$textInputStyle}
           {...rnTextInputProps}
         />
-        <Pressable disabled={sendIsDisabled} onPress={onPressSend}>
+        <Pressable disabled={sendIsDisabled} onPress={() => onPressSend(value || '')}>
           <Text bold color={sendIsDisabled ? 'gray2' : 'primary'}>
             Enviar
           </Text>
