@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 import { Dimensions } from 'react-native';
 
 import { Box, BoxProps, Icon, Text } from '@components';
-import { useToast } from '@services';
+import { useToast, useToastService } from '@services';
 import { $shadowProps } from '@theme';
 
 export function Toast() {
-  const { toast, hideToast } = useToast();
+  const toast = useToast();
+  const { hideToast } = useToastService();
 
   useEffect(() => {
     if (toast) {
