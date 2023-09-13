@@ -8,7 +8,9 @@ interface Props {
   postId: number;
   onAddComment: () => void;
 }
+
 export function PostCommentTextMessage({ postId, onAddComment }: Props) {
+  const [message, setMessage] = useState('');
   const { createComment } = usePostCommentCreate(postId, {
     onSuccess: () => {
       setMessage('');
@@ -16,7 +18,6 @@ export function PostCommentTextMessage({ postId, onAddComment }: Props) {
       onAddComment();
     },
   });
-  const [message, setMessage] = useState('');
 
   return (
     <TextMessage
