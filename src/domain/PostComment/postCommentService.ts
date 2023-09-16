@@ -4,7 +4,6 @@ import { Page } from '@types';
 import { postCommentAdapter } from './postCommentAdapter';
 import { postCommentApi } from './postCommentApi';
 import { PostComment } from './postCommentTypes';
-import { tr } from 'date-fns/locale';
 
 async function getList(postId: number, page: number): Promise<Page<PostComment>> {
   const postCommentPageAPI = await postCommentApi.getList(postId, { page, per_page: 9 });
