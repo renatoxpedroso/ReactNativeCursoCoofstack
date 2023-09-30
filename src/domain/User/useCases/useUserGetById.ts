@@ -13,6 +13,7 @@ export function useUserGetById(id: number) {
   const { data, isLoading, isError } = useQuery({
     queryKey: [QueryKeys.UserGetById, id],
     queryFn: () => userService.getUser(id),
+    staleTime: 1000 * 30,
   });
   // const getUserById = useCallback(async () => {
   //   try {
