@@ -4,8 +4,8 @@ import { UserAPI } from './userTypes';
 
 let PATH = 'users';
 
-async function getUser(id?: number): Promise<PageAPI<UserAPI>> {
-  const response = await api.get<PageAPI<UserAPI>>(`${PATH}/${id}`);
+async function getUser(id?: number): Promise<UserAPI> {
+  const response = await api.get<UserAPI>(`${PATH}/${id}`);
 
   return response.data;
 }
