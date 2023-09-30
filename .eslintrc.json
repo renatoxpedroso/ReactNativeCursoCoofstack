@@ -3,7 +3,12 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "airbnb/hooks", "prettier"],
+  "extends": [
+    "plugin:react/recommended/@tanstack/eslint-plugin-query",
+    "airbnb",
+    "airbnb/hooks",
+    "prettier"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -11,7 +16,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-native", "import-helpers"],
+  "plugins": ["react", "react-native", "import-helpers", "@tanstack/query"],
   "rules": {
     "import-helpers/order-imports": [
       "warn",
@@ -22,6 +27,8 @@
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ],
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/prefer-query-object-syntax": "error",
 
     // permite arquivos .js possuam JSX
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],

@@ -7,17 +7,22 @@ import { SignUpScreen } from './src/screens/auth/SignUpScreen/SignUpScreen';
 import { Router } from './src/routes/Routes';
 import { Toast } from '@components';
 import { ToastProvider } from '@services';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App(): JSX.Element {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider theme={theme}>
-        <ToastProvider>
-          <Router />
-          <Toast />
-        </ToastProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <ThemeProvider theme={theme}>
+          <ToastProvider>
+            <Router />
+            <Toast />
+          </ToastProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }
 

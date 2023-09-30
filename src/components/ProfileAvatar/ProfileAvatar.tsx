@@ -1,4 +1,3 @@
-import { PostComment } from '@domain';
 import React from 'react';
 import { Image } from 'react-native';
 

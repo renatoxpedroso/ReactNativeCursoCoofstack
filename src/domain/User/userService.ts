@@ -1,5 +1,3 @@
-import { Page } from '@types';
-
 import { User } from './userTypes';
 import { userApi } from './userApi';
 import { userAdapter } from './userAdapter';

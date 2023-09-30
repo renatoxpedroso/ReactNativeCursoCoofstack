@@ -1,9 +1,9 @@
 import React from 'react';
+import { Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Post } from '@domain';
 import { Box, ProfileAvatar, Text } from '@components';
-import { Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 type Props = Pick<Post, 'author'>;
 
