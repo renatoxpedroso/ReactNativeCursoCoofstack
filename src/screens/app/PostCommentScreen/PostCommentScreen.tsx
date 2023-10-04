@@ -38,7 +38,7 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
             <PostCommentBottom fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
           }
         />
-        <PostCommentTextMessage postId={postId} onAddComment={refresh} />
+        <PostCommentTextMessage postId={postId} />
       </Box>
     </Screen>
   );
