@@ -11,7 +11,7 @@ import { useAppSafeArea } from '@hooks';
 export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>) {
   const postId = route.params.postId;
   const postAuthoredId = route.params.postAuthoredId;
-  const { data: list, fetchNextPage, hasNextPage, refresh } = usePostCommentList(postId);
+  const { list, fetchNextPage, hasNextPage, refresh } = usePostCommentList(postId);
   const { bottom } = useAppSafeArea();
   const { id } = useUser();
 
