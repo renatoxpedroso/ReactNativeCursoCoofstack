@@ -1,16 +1,21 @@
 import React from 'react';
 
-import {useForm, Controller} from 'react-hook-form';
-import {Alert} from 'react-native';
+import { useForm } from 'react-hook-form';
 import { AuthScreenProps } from '@routes';
 
-import {zodResolver} from '@hookform/resolvers/zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import {Text, Button, Screen, FormTextInput, FormPasswordInput} from '@components';
-import {loginSchema, LoginSchema} from './loginSchema';
+import { Text, Button, Screen, FormTextInput, FormPasswordInput } from '@components';
+import { loginSchema, LoginSchema } from './loginSchema';
+import { useAuthSignIn } from '@domain';
+import { useToastService } from '@services';
 
-export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
-  const {control, formState, handleSubmit} = useForm<LoginSchema>({
+export function LoginScreen({ navigation }: AuthScreenProps<'LoginScreen'>) {
+  const { showToast } = useToastService();
+  const { isLoading, signIn } = useAuthSignIn({
+    onError: (message) => showToast({ message, type: 'error' }),
+  });
+  const { control, formState, handleSubmit } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
@@ -27,8 +32,8 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
     navigation.navigate('ForgotPasswordScreen');
   }
 
-  function submitForm({email, password}: LoginSchema) {
-    Alert.alert(`Email: ${email} ${'\n'} Senha: ${password}`);
+  function submitForm({ email, password }: LoginSchema) {
+    signIn({ email, password });
   }
 
   return (
@@ -45,7 +50,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
         name="email"
         label="E-mail"
         placeholder="Digite seu e-mail"
-        boxProps={{marginBottom: 's20'}}
+        boxProps={{ marginBottom: 's20' }}
       />
 
       <FormPasswordInput
@@ -53,7 +58,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
         name="password"
         label="Senha"
         placeholder="Digite sua senha"
-        boxProps={{marginBottom: 's20'}}
+        boxProps={{ marginBottom: 's20' }}
       />
 
       <Text
@@ -61,11 +66,13 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
         preset="paragraphSmall"
         bold
         color="primary"
-        marginBottom="s40">
+        marginBottom="s40"
+      >
         Esqueci minha senha
       </Text>
 
       <Button
+        loading={isLoading}
         disabled={!formState.isValid}
         onPress={handleSubmit(submitForm)}
         preset="primary"
@@ -73,11 +80,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
         marginBottom="s20"
       />
 
-      <Button
-        onPress={navigateToSignUpScreen}
-        preset="outline"
-        title="Criar uma conta"
-      />
+      <Button onPress={navigateToSignUpScreen} preset="outline" title="Criar uma conta" />
     </Screen>
   );
 }
