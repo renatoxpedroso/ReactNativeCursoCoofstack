@@ -18,10 +18,10 @@ export function PostCommentScreen({ route }: AppScreenProps<'PostCommentScreen'>
   function renderItem({ item }: ListRenderItemInfo<PostComment>) {
     return (
       <PostCommentItem
+        postId={postId}
         postComment={item}
-        onRemoveComment={refresh}
         userId={id}
-        postAuthoredId={postAuthoredId}
+        postAuthorId={postAuthoredId}
       />
     );
   }

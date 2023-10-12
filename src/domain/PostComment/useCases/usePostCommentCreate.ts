@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PostComment } from '@domain';
 import { MutationOptions, QueryKeys } from '@infra';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { postCommentService } from '../postCommentService';
 
 export function usePostCommentCreate(postId: number, options?: MutationOptions<PostComment>) {
@@ -24,7 +25,7 @@ export function usePostCommentCreate(postId: number, options?: MutationOptions<P
   });
 
   async function createComment(message: string) {
-    await mutate({ message });
+    mutate({ message });
   }
 
   return {

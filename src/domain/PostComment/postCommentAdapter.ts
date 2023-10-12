@@ -1,22 +1,22 @@
-import { PostComment, PostCommentAPI } from '@domain';
 import { dateUtils } from '@utils';
 
-/**
- * @description Adapta o PostCommentAPI para o modelo de PostComment
- */
+import { PostComment, PostCommentAPI } from './postCommentTypes';
+
 function toPostComment(postCommentAPI: PostCommentAPI): PostComment {
   return {
     id: postCommentAPI.id,
     message: postCommentAPI.message,
     createdAt: postCommentAPI.created_at,
-    createdAtRealtive: dateUtils.formatRelative(postCommentAPI.created_at),
+    createdAtRelative: dateUtils.formatRelative(postCommentAPI.created_at),
     author: {
       id: postCommentAPI.user.id,
-      profileURL: postCommentAPI.user.profile_url,
       name: postCommentAPI.user.full_name,
+      profileURL: postCommentAPI.user.profile_url,
       userName: postCommentAPI.user.username,
     },
   };
 }
 
-export const postCommentAdapter = { toPostComment };
+export const postCommentAdapter = {
+  toPostComment,
+};

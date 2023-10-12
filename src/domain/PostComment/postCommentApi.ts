@@ -1,15 +1,15 @@
-import { PageAPI, PageParams, api } from '@api';
+import { api, PageAPI, PageParams } from '@api';
 
 import { PostCommentAPI } from './postCommentTypes';
 
-let PATH = 'user/post_comment';
+const PATH = 'user/post_comment';
 
-async function getList(
-  post_id?: number,
-  pageParams?: PageParams
-): Promise<PageAPI<PostCommentAPI>> {
+async function getList(post_id: number, pageParams?: PageParams): Promise<PageAPI<PostCommentAPI>> {
   const response = await api.get<PageAPI<PostCommentAPI>>(PATH, {
-    params: { post_id, ...pageParams },
+    params: {
+      post_id,
+      ...pageParams,
+    },
   });
   return response.data;
 }

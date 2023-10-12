@@ -1,29 +1,29 @@
 import React from 'react';
 import { Alert, Pressable } from 'react-native';
 
-import { Box, ProfileAvatar, Text } from '@components';
 import { PostComment, postCommentService, usePostCommentRemove } from '@domain';
 import { useToastService } from '@services';
 
+import { Box, ProfileAvatar, Text } from '@components';
+
 interface Props {
+  postId: number;
   postComment: PostComment;
   userId: number;
-  postAuthoredId: number;
-  onRemoveComment: () => void;
+  postAuthorId: number;
 }
-
-export function PostCommentItem({ postComment, userId, postAuthoredId, onRemoveComment }: Props) {
+export function PostCommentItem({ postId, postComment, userId, postAuthorId }: Props) {
   const { showToast } = useToastService();
-  const { mutate } = usePostCommentRemove({
+  const { mutate } = usePostCommentRemove(postId, {
     onSuccess: () => {
-      onRemoveComment();
-      showToast({ message: 'Comentário deletado', duration: 5000, position: 'bottom' });
+      showToast({ message: 'Cometário deletado' });
     },
   });
-  const isAllowToDelete = postCommentService.isAllowDelete(postComment, userId, postAuthoredId);
+
+  const isAllowToDelete = postCommentService.isAllowToDelete(postComment, userId, postAuthorId);
 
   function confirmRemove() {
-    Alert.alert('Deseja excluir o comentário', 'pressione confirmar', [
+    Alert.alert('Deseja excluir o comentário?', 'pressione confirmar', [
       {
         text: 'Confirmar',
         onPress: () => mutate({ postCommentId: postComment.id }),
@@ -37,14 +37,14 @@ export function PostCommentItem({ postComment, userId, postAuthoredId, onRemoveC
 
   return (
     <Pressable disabled={!isAllowToDelete} onLongPress={confirmRemove}>
-      <Box flexDirection="row" marginBottom="s16">
+      <Box flexDirection="row" alignItems="center" mb="s16">
         <ProfileAvatar imageURL={postComment.author.profileURL} />
         <Box ml="s12" flex={1}>
-          <Text bold preset="paragraphSmall">
+          <Text preset="paragraphSmall" bold>
             {postComment.author.userName}
           </Text>
-          <Text bold preset="paragraphSmall" color="gray1">
-            {postComment.message} - {postComment.createdAtRealtive}
+          <Text preset="paragraphSmall" color="gray1">
+            {postComment.message} - {postComment.createdAtRelative}
           </Text>
         </Box>
       </Box>

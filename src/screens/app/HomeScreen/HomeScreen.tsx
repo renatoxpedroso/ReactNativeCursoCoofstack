@@ -1,16 +1,17 @@
 import React from 'react';
-import { FlatList, ListRenderItemInfo, RefreshControl } from 'react-native';
+import { FlatList, ListRenderItemInfo, RefreshControl, StyleProp, ViewStyle } from 'react-native';
+
+import { Post, usePostList } from '@domain';
 import { useScrollToTop } from '@react-navigation/native';
 
+import { PostItem, Screen } from '@components';
 import { AppTabScreenProps } from '@routes';
-import { PostItem, Screen, Text } from '@components';
-import { Post, usePostList } from '@domain';
 
-import { HomeHeader } from './components/HomeHeader';
 import { HomeEmpty } from './components/HomeEmpty';
+import { HomeHeader } from './components/HomeHeader';
 
-export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
-  const { isLoading, isError, list: postList, refresh, fetchNextPage } = usePostList();
+export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {
+  const { list: postList, isError, isLoading, refresh, fetchNextPage } = usePostList();
 
   const flatListRef = React.useRef<FlatList<Post>>(null);
   useScrollToTop(flatListRef);
@@ -20,7 +21,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
   }
 
   return (
-    <Screen style={{ paddingTop: 0, paddingHorizontal: 0, paddingBottom: 0, flex: 1 }}>
+    <Screen style={$screen}>
       <FlatList
         ref={flatListRef}
         showsVerticalScrollIndicator={false}
@@ -38,3 +39,10 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
     </Screen>
   );
 }
+
+const $screen: StyleProp<ViewStyle> = {
+  paddingTop: 0,
+  paddingBottom: 0,
+  paddingHorizontal: 0,
+  flex: 1,
+};

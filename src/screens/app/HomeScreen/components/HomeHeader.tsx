@@ -1,30 +1,33 @@
 import React from 'react';
 
 import { SimpleLogo } from '@brand';
-import { Box, Icon } from '@components';
+
+import { Box, BoxProps, Icon } from '@components';
 import { useAppSafeArea } from '@hooks';
 
 export function HomeHeader() {
   const { top } = useAppSafeArea();
+
   return (
-    <Box
-      flexDirection="row"
-      justifyContent="space-between"
-      paddingBottom="s24"
-      paddingHorizontal="s24"
-      style={{ paddingTop: top }}
-    >
-      <SimpleLogo width={70}></SimpleLogo>
+    <Box {...$wrapper} style={{ paddingTop: top }}>
+      <SimpleLogo width={70} />
       <Box flexDirection="row">
         <Box mr="s24">
           <Icon name="search" />
         </Box>
         <Box mr="s24">
-          <Icon name="bellOn" />
+          <Icon name="bell" />
         </Box>
-
-        <Icon name="chatOn" />
+        <Icon name="comment" />
       </Box>
     </Box>
   );
 }
+
+const $wrapper: BoxProps = {
+  flexDirection: 'row',
+
+  justifyContent: 'space-between',
+  paddingBottom: 's24',
+  paddingHorizontal: 's24',
+};
