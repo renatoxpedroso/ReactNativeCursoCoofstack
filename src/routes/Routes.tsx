@@ -3,8 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { AppStack } from './AppStack';
 import { AuthStack } from './AuthStack';
+import { useAuthCredentials } from '@services';
 
 export function Router() {
-  const authenticate = false;
-  return <NavigationContainer>{authenticate ? <AppStack /> : <AuthStack />}</NavigationContainer>;
+  const { authCredentials } = useAuthCredentials();
+  return (
+    <NavigationContainer>{authCredentials ? <AppStack /> : <AuthStack />}</NavigationContainer>
+  );
 }
