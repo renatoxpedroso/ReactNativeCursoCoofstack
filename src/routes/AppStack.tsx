@@ -1,10 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PostCommentScreen, SettingsScreen, ProfileScreen } from '@screens';
-import { AppTabNavigator } from './AppTabNavigator';
+import { AppTabBottomTabParamList, AppTabNavigator } from './AppTabNavigator';
+import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type AppStackPramList = {
-  AppTabNavigator: undefined;
+  AppTabNavigator: NavigatorScreenParams<AppTabBottomTabParamList>;
   SettingsScreen: undefined;
   ProfileScreen: { userId: number };
   PostCommentScreen: { postId: number; postAuthoredId: number };
