@@ -10,7 +10,7 @@ interface Variables {
 }
 
 export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
-  const { saveCredentias } = useAuthCredentials();
+  const { saveCredentials } = useAuthCredentials();
   const mutation = useMutation<AuthCredentials, Error, Variables>({
     mutationFn: ({ email, password }) => authService.signIn(email, password),
     retry: false,
@@ -20,7 +20,8 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
       }
     },
     onSuccess: (authCredentials) => {
-      authService.updateToken(authCredentials.token), saveCredentias(authCredentials);
+      //authService.updateToken(authCredentials.token), saveCredentials(authCredentials);
+      saveCredentials(authCredentials);
     },
   });
 

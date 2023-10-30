@@ -1,28 +1,30 @@
 import React from 'react';
 import { ThemeProvider } from '@shopify/restyle';
 import { theme } from './src/theme/theme';
-import { LoginScreen } from './src/screens/auth/LoginScreen/LoginScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { SignUpScreen } from './src/screens/auth/SignUpScreen/SignUpScreen';
 import { Router } from './src/routes/Routes';
 import { Toast } from '@components';
-import { ToastProvider } from '@services';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthCredentialsProvider } from '@services';
 
 const queryClient = new QueryClient();
 
 function App(): JSX.Element {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <ThemeProvider theme={theme}>
-          <ToastProvider>
+    <AuthCredentialsProvider>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <ThemeProvider theme={theme}>
+            {/* Only use ToastProvider if it is using Context implementation.
+  
+            {/* <ToastProvider> */}
             <Router />
             <Toast />
-          </ToastProvider>
-        </ThemeProvider>
-      </SafeAreaProvider>
-    </QueryClientProvider>
+            {/* </ToastProvider> */}
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </QueryClientProvider>
+    </AuthCredentialsProvider>
   );
 }
 
