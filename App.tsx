@@ -5,9 +5,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Router } from './src/routes/Routes';
 import { Toast } from '@components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AuthCredentialsProvider } from '@services';
+import { AuthCredentialsProvider, MMKVStorage, initiaalizeStorage } from '@services';
 
 const queryClient = new QueryClient();
+
+initiaalizeStorage(MMKVStorage);
 
 function App(): JSX.Element {
   return (
@@ -15,12 +17,8 @@ function App(): JSX.Element {
       <QueryClientProvider client={queryClient}>
         <SafeAreaProvider>
           <ThemeProvider theme={theme}>
-            {/* Only use ToastProvider if it is using Context implementation.
-  
-            {/* <ToastProvider> */}
             <Router />
             <Toast />
-            {/* </ToastProvider> */}
           </ThemeProvider>
         </SafeAreaProvider>
       </QueryClientProvider>
