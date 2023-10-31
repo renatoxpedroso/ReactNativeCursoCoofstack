@@ -18,3 +18,19 @@ export interface SignInData {
   email?: string;
   passaword: string;
 }
+
+export interface SignUpData {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface SignUpData {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
