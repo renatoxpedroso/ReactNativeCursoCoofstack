@@ -7,8 +7,15 @@ import { AuthScreenProps, AuthStackParamList } from '@routes';
 import { useResetNavigationSuccess } from '@hooks';
 import { signUpSchema, SignUpSchema } from './signUpSchema';
 
-import { Text, Button, Screen, FormTextInput, FormPasswordInput } from '@components';
-import { useAuthSignUp } from '@domain';
+import {
+  Text,
+  Button,
+  Screen,
+  FormTextInput,
+  FormPasswordInput,
+  ActivityIndicator,
+} from '@components';
+import { useAuthIsUsernameAvailable, useAuthSignUp } from '@domain';
 
 export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
   const resetParam: AuthStackParamList['SuccessScreen'] = {
@@ -28,7 +35,7 @@ export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
     password: '',
   };
 
-  const { control, formState, handleSubmit } = useForm<SignUpSchema>({
+  const { control, formState, handleSubmit, watch, getFieldState } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues,
     mode: 'onChange',
@@ -39,6 +46,14 @@ export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
     onSuccess: () => {
       reset(resetParam);
     },
+  });
+
+  const username = watch('username');
+  const usernameState = getFieldState('username');
+  const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
+  const usernameQuery = useAuthIsUsernameAvailable({
+    username,
+    enabled: usernameIsValid,
   });
 
   function submitForm(formValues: SignUpSchema) {
@@ -57,6 +72,7 @@ export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
         label="Seu username"
         placeholder="@"
         boxProps={{ marginBottom: 's20' }}
+        RightComponent={usernameQuery.isFetching ? <ActivityIndicator size="small" /> : undefined}
       />
 
       <FormTextInput
