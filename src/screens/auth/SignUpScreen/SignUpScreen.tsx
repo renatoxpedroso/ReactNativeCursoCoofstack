@@ -15,7 +15,8 @@ import {
   FormPasswordInput,
   ActivityIndicator,
 } from '@components';
-import { useAuthIsUsernameAvailable, useAuthSignUp } from '@domain';
+import { useAuthSignUp } from '@domain';
+import { useAsyncValidation } from './useAsyncValidation';
 
 export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
   const resetParam: AuthStackParamList['SuccessScreen'] = {
@@ -48,13 +49,7 @@ export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
     },
   });
 
-  const username = watch('username');
-  const usernameState = getFieldState('username');
-  const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
-  const usernameQuery = useAuthIsUsernameAvailable({
-    username,
-    enabled: usernameIsValid,
-  });
+  const { usernameValidation, emailValidation } = useAsyncValidation({ watch, getFieldState });
 
   function submitForm(formValues: SignUpSchema) {
     signUp(formValues);
@@ -71,8 +66,11 @@ export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
         name="username"
         label="Seu username"
         placeholder="@"
+        errorMessage={usernameValidation.errorMessage}
         boxProps={{ marginBottom: 's20' }}
-        RightComponent={usernameQuery.isFetching ? <ActivityIndicator size="small" /> : undefined}
+        RightComponent={
+          usernameValidation.isFetching ? <ActivityIndicator size="small" /> : undefined
+        }
       />
 
       <FormTextInput
@@ -96,7 +94,9 @@ export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
         name="email"
         label="E-mail"
         placeholder="Digite seu e-mail"
+        errorMessage={emailValidation.errorMessage}
         boxProps={{ marginBottom: 's20' }}
+        RightComponent={emailValidation.isFetching ? <ActivityIndicator size="small" /> : undefined}
       />
 
       <FormPasswordInput
@@ -109,7 +109,7 @@ export function SignUpScreen({ navigation }: AuthScreenProps<'SignUpScreen'>) {
 
       <Button
         loading={isLoading}
-        disabled={!formState.isValid}
+        disabled={!formState.isValid || usernameValidation.notReady}
         onPress={handleSubmit(submitForm)}
         title="Criar minha conta"
       />
