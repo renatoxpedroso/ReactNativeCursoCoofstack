@@ -2,12 +2,16 @@ import { User, UserAPI } from '../User/userTypes';
 
 export interface AuthCredentials {
   token: string;
+  tokenExpiresAt: string;
+  refreshToken: string;
   user: User;
 }
 
 export interface AuthCredentialsAPI {
   auth: {
     type: string;
+    refreshToken: string;
+    expires_at: string;
     token: string;
   };
   user: UserAPI;

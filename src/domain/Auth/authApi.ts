@@ -1,6 +1,11 @@
 import { api } from '@api';
 
-import { AuthCredentialsAPI, FieldIsAvailableAPI, SignUpData } from './authTypes';
+import {
+  AuthCredentialsAPI,
+  FieldIsAvailableAPI,
+  ForgotPasswordParam,
+  SignUpData,
+} from './authTypes';
 import { UserAPI } from '../User/userTypes';
 
 async function signIn(email: string, password: string): Promise<AuthCredentialsAPI> {
@@ -35,6 +40,14 @@ async function forgotPassword(params: ForgotPasswordParam): Promise<{ message: s
   return response.data;
 }
 
+async function refreshToken(token: string): Promise<AuthCredentialsAPI> {
+  const response = await api.post<AuthCredentialsAPI>('auth/refresh-token', {
+    refreshToken: token,
+  });
+
+  return response.data;
+}
+
 export const authApi = {
   signIn,
   signOut,
@@ -42,4 +55,5 @@ export const authApi = {
   isUserNameAvailable,
   isEmailAvailable,
   forgotPassword,
+  refreshToken,
 };
