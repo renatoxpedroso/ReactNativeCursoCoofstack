@@ -3,9 +3,10 @@ import { createContext, useState } from 'react';
 
 import { AuthCredentials, authService } from '@domain';
 
+import { authApi } from '../../../domain/Auth/authApi';
 import { AuthCredentialsService } from '../authCredentialsType';
 import { authCredentialsStorage } from '../authCredentialsStorage';
-import { api } from '@api';
+import { registerInterceptor } from '@api';
 
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
   authCredentials: null,
@@ -23,32 +24,15 @@ export function AuthCredentialsProvider({ children }: React.PropsWithChildren<{}
   }, []);
 
   useEffect(() => {
-    const interceptor = api.interceptors.response.use(
-      (response) => response,
-      async (responseError) => {
-        if (responseError.response.status === 401) {
-          if (!authCredentials?.refreshToken) {
-            removeCredentials();
-            return Promise.reject(responseError);
-          }
-
-          const failedRequest = responseError.config;
-
-          const newAuthCredentials = await authService.authenticateByRefreshToken(
-            authCredentials?.refreshToken
-          );
-          saveCredentials(newAuthCredentials);
-
-          failedRequest.headers.Authorization = `Bearer ${newAuthCredentials.token}`;
-
-          return api(failedRequest);
-        }
-      }
-    );
+    const interceptor = registerInterceptor({
+      authCredentials,
+      removeCredentials,
+      saveCredentials,
+    });
 
     // remove listener when component unmount
-    return () => api.interceptors.response.eject(interceptor);
-  }, [authCredentials?.refreshToken]);
+    return interceptor;
+  }, [authCredentials]);
 
   async function startAuthCredentials() {
     try {
